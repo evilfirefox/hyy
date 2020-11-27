@@ -1,0 +1,26 @@
+{
+  "name": "evilfirefox/hyy",
+  "type": "library",
+  "description": "",
+  "keywords": [],
+  "homepage": "",
+  "authors": [
+    {
+      "name": "Dan A. Haman",
+      "email": "vague.software@gmail.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "autoload": {
+    "psr-4": {
+      "Vague\\Hyy\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Vague\\Hyy\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+  }
+}
