@@ -8,7 +8,8 @@ namespace Vague\Hyy;
  */
 class Hyydrator
 {
-    const REGEX_FIELD_NAME = '/([^_]+)_(.+)/i';
+    const REGEX_FIELD_NAME = '/([^_]+)%s(.+)/i';
+    const DELIMITER = '_';
     const CONFIG_RELATION_TYPE = 'type';
     const CONFIG_RELATION_CLASS = 'class';
     const TYPE_MULTIPLE = 0;
@@ -21,6 +22,20 @@ class Hyydrator
         self::TYPE_MULTIPLE => 'set%ss',
         self::TYPE_SINGLE => 'set%s',
     ];
+
+    /**
+     * @var string
+     */
+    private $delimiter;
+
+    /**
+     * Hyydrator constructor.
+     * @param string $delimiter
+     */
+    public function __construct(string $delimiter = self::DELIMITER)
+    {
+        $this->delimiter = $delimiter;
+    }
 
     /**
      * @param array $rawData
@@ -37,7 +52,7 @@ class Hyydrator
             $nativeRow = [];
             $relationsRow = [];
             foreach ($row as $key => $value) {
-                if (preg_match(self::REGEX_FIELD_NAME, $key, $m)
+                if (preg_match(sprintf(self::REGEX_FIELD_NAME, self::DELIMITER), $key, $m)
                     && array_key_exists($m[1], $configuration)
                 ) {
                     $relationsRow[$m[1]][$m[2]] = $value;
